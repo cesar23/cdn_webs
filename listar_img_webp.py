@@ -16,8 +16,8 @@ from glob import glob
 
 from  Config.constantes import *
 
-print(DATABASE_CONFIG['db_host'])
-exit(0)
+print(CONFIG['server'])
+
 
 plantilla ="""
 <!doctype html>
@@ -134,18 +134,24 @@ def generarIndex(path,platilla_html):
     global plantilla
 
     img_list = []
-
+    excludeDirs = ['.git', '.idea', 'Config']
     for dirpath, dirnames, filenames in os.walk(path,topdown=True):
-        print('\nruta       :', dirpath)
-        for img_name in filenames:
-            # se pueden utilizar más tipos de imágenes (bmp, tiff, gif)
-            # if img_name.endswith(".jpg") or img_name.endswith(".png") or img_name.endswith(".jpeg"):
-            if img_name.endswith(".webp") or img_name.endswith(".jpg") or img_name.endswith(".png")or img_name.endswith(".svg"):
-                img_list.append(img_name)
+        [dirnames.remove(d) for d in list(dirnames) if d in excludeDirs]
+        # if dirpath.endswith(".git") or dirpath.endswith(".idea") or dirpath.endswith("Config")or dirpath.endswith("libs"):
+        #     continue
 
-    print("-------------------------------------------------------------------------")
-    print("-----------------Ejecutamos el comando para Convertir---------------------")
-    print("-------------------------------------------------------------------------")
+        print('\nruta       :', dirpath)
+        print("Nombre Carpeta : "+ os.path.basename(dirpath))
+
+        for file in filenames:
+            archivo = dirpath + os.sep + file
+            print('path_archivo :', archivo)
+            # se pueden utilizar más tipos de imágenes (bmp, tiff, gif)
+            # if file.endswith(".jpg") or file.endswith(".png") or file.endswith(".jpeg"):
+            if file.endswith(".webp") or file.endswith(".jpg") or file.endswith(".png")or file.endswith(".svg"):
+                img_list.append(file)
+
+
 
 
     salida_html=''
