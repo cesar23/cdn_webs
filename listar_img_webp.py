@@ -9,17 +9,16 @@ ejecutar desde la consola
 
 """
 
-import sys,os
+import sys, os,re
 import time
 from subprocess import call
 from glob import glob
 
-from  Config.constantes import *
+from Config.constantes import *
 
 print(CONFIG['server'])
 
-
-plantilla ="""
+plantilla = """
 <!doctype html>
 <html lang="en">
 <head>
@@ -117,10 +116,21 @@ plantilla ="""
 <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"></script>
 
 <script>
-    function changeUrl() {
-        var site = "http://www.w3schools.com";
-        document.getElementsByName('iFrameName')[0].src = site;
-    }
+   if ('loading' in HTMLImageElement.prototype) {
+    const images = document.querySelectorAll('*[loading="lazy"]');
+    images.forEach(img => {
+        data_src=img.getAttribute('data-src')
+        img.src = data_src;
+    });
+    console.log('nativo')
+} else {
+    console.log('lazysizes')
+    // Dynamically import the LazySizes library
+    const script = document.createElement('script');
+    script.src =
+        'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js';
+    document.body.appendChild(script);
+}
 </script>
 </body>
 </html>
@@ -128,72 +138,76 @@ plantilla ="""
 """
 
 
+def getCurrentNameDir():
+    abspath = os.path.abspath(__file__)
+    dirname = os.path.dirname(abspath)
+    return dirname
 
-
-def generarIndex(path,platilla_html):
+def generarIndex(path, platilla_html):
     global plantilla
 
     img_list = []
     excludeDirs = ['.git', '.idea', 'Config']
-    for dirpath, dirnames, filenames in os.walk(path,topdown=True):
+    salida_html = ''
+
+    for dirpath, dirnames, filenames in os.walk(path, topdown=True):
         [dirnames.remove(d) for d in list(dirnames) if d in excludeDirs]
         # if dirpath.endswith(".git") or dirpath.endswith(".idea") or dirpath.endswith("Config")or dirpath.endswith("libs"):
         #     continue
 
         print('\nruta       :', dirpath)
-        print("Nombre Carpeta : "+ os.path.basename(dirpath))
+        NameDir = dirpath.replace(getCurrentNameDir(),'')
+
+        print("Nombre Carpeta : " +NameDir)
+
 
         for file in filenames:
             archivo = dirpath + os.sep + file
             print('path_archivo :', archivo)
             # se pueden utilizar más tipos de imágenes (bmp, tiff, gif)
             # if file.endswith(".jpg") or file.endswith(".png") or file.endswith(".jpeg"):
-            if file.endswith(".webp") or file.endswith(".jpg") or file.endswith(".png")or file.endswith(".svg"):
+            if file.endswith(".webp") or file.endswith(".jpg") or file.endswith(".png") or file.endswith(".svg"):
                 img_list.append(file)
+                img_name = file
+                if NameDir != '':
+                    NameDir = re.sub(r'(?is):.+', '', NameDir)
+                    img_name = "{}/{}".format(NameDir, file)
+                    img_name=img_name.replace('\\','/').replace('//','/')
 
+                pathServer ="/cdn_webs/{}".format(img_name)
+                pathServer=pathServer.replace('//','/')
+                url_imagen ="https://cesar23.github.io{}".format(pathServer)
 
+                #url_imagen = "https://cesar23.github.io/{}".format(img_name)
 
-
-    salida_html=''
-    for img_name in img_list:
-
-        url_imagen ="https://cesar23.github.io/cdn_webs/{}".format(img_name)
-
-        min_template="""
-        <div class="col-md-3">
-                    <div class="card">
-                        <img class="card-img-bottom img-fluid"
-                             src="{url_imagen}"/>
-                        <div class="card-body">
-                            <h4 class="card-title">{name_imagen}</h4>
-                            <p class="card-text">aqui ver link</p>
-                            <a href="{url_imagen}" class="btn btn-primary">Ver</a>
-                        </div>
-
-                    </div>
-                </div>
+                min_template = """
+                <div class="col-md-3">
+                            <div class="card">
+                                <img class="card-img-bottom img-fluid"
+                                    src="https://www.solodev.com/_/images/client-loader.gif" loading="lazy" data-src="{url_imagen}"/>
+                                <div class="card-body">
+                                    <h4 class="card-title">{name_imagen}</h4>
+                                    <p class="card-text">aqui ver link</p>
+                                    <a href="{url_imagen}" class="btn btn-primary">Ver</a>
+                                </div>
         
-        """.format(url_imagen=url_imagen,name_imagen=img_name)
+                            </div>
+                        </div>
+                
+                """.format(url_imagen=url_imagen, name_imagen=img_name)
 
-        #
-        # str ="https://cesar23.github.io/web_cursos_geral/2020/{}".format(img_name)
-        # str= '<a href="{}">{}</a> <br>'.format(str,str)
-        # print(str )
-        salida_html+=min_template +'\n'
-        # running the above command
-        # call(cmd, shell=False)
-        # print(cmd)    # for debug
+                #
+                # str ="https://cesar23.github.io/web_cursos_geral/2020/{}".format(img_name)
+                # str= '<a href="{}">{}</a> <br>'.format(str,str)
+                # print(str )
+                salida_html += min_template + '\n'
+                # running the above command
+                # call(cmd, shell=False)
+                # print(cmd)    # for debug
 
-    platilla_nueva=platilla_html.replace('{{%LISTADO%}}',salida_html)
-    with open('index.html', "w",encoding='utf-8') as file:
+    platilla_nueva = platilla_html.replace('{{%LISTADO%}}', salida_html)
+    with open('index.html', "w", encoding='utf-8') as file:
         file.write(platilla_nueva)
-
-
-
-
-
-
-
 
 
 #
@@ -205,19 +219,16 @@ def generarIndex(path,platilla_html):
 #         img_list.append(img_name.split('\\')[-1])
 
 
-
-
 # print(img_list)   # for debug
-
 
 
 # salida = input("Pulsar [enter para salir]")
 
-#folder-name
+# folder-name
 path = r"D:\repos\cdn_webs"
-#quality of produced .webp images [0-100]
+# quality of produced .webp images [0-100]
 
-generarIndex(path,plantilla)
+generarIndex(path, plantilla)
 
 print("-------------------------------------------------------------------------")
 print("-----------------Filtramos solo las imagenes [jps,png]---------------------")
