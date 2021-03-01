@@ -19,7 +19,20 @@ function gitup2() {
     git commit -m "cmder se actualizo :${DATE_HOUR_GIT}"
     git push
 }
+
+function compilar() {
+    git pull
+	  git add -A
+    python listar_img_webp.py
+    python camicv/listar_interno.py
+    python pcbyte/listar_interno.py
+    git push
+}
+
+
 clear
+
+compilar
 gitup
 
 echo ""
