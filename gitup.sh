@@ -21,12 +21,10 @@ function gitup2() {
 }
 
 function compilar() {
-    git pull
-	  git add -A
     python listar_img_webp.py
     python camicv/listar_interno.py
-    python pcbyte/listar_interno.py
-    git push
+
+
 }
 
 
