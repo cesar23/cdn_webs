@@ -13,7 +13,7 @@ import sys, os,re
 import time
 from subprocess import call
 from glob import glob
-
+import cv2
 from Config import *
 
 def humanbytes(B):
@@ -41,6 +41,16 @@ def humanbytes(B):
 
 
 plantilla = CONFIG['plantillaGlobal']
+
+def getDimensionImagen(path_file):
+
+    try:
+        image = cv2.imread(path_file)
+        ancho = image.shape[1] #columnas
+        alto = image.shape[0] # filas
+        return "ancho {}px - alto {}px".format(ancho,alto)
+    except:
+        return "no  tiene  dimensiones"
 
 
 
@@ -85,6 +95,9 @@ def generarIndex(path, platilla_html):
             if file.endswith(".webp") or file.endswith(".jpg") or file.endswith(".png") or file.endswith(".svg"):
                 img_list.append(file)
                 img_name = file
+                dimension_imagen=getDimensionImagen(archivo)
+
+
 
                 path_corto=archivo.replace(path,'')
                 # path_corto=NameDir +path_corto
@@ -109,20 +122,23 @@ def generarIndex(path, platilla_html):
                 #url_imagen = "https://cesar23.github.io/{}".format(img_name)
 
                 min_template = """
-                <div class="col-md-3">
+                   <div class="col-md-3">
                             <div class="card">
                                 <img class="card-img-bottom img-fluid"
                                     src="https://www.solodev.com/_/images/client-loader.gif" loading="lazy" data-src="{url_imagen}"/>
                                 <div class="card-body">
                                     <h6 class="card-title">{name_imagen}</h6>
-                                    <p class="card-text">peso de archivo es:{peso}</p>
+                                    <p class="card-text">peso de archivo es: <strong>{peso}</strong><br>
+                                        link es : <a href="{url_imagen}">{url_imagen}</a>  <br>
+                                        Dimensiones: {dimensiones}
+                                     </p>
                                     <a href="{url_imagen}" class="btn btn-primary">Ver</a>
                                 </div>
         
                             </div>
                         </div>
                 
-                """.format(url_imagen=url_imagen, name_imagen=img_name,peso=peso_archivo)
+                """.format(url_imagen=url_imagen, name_imagen=img_name,peso=peso_archivo,dimensiones=dimension_imagen)
 
                 #
                 # str ="https://cesar23.github.io/web_cursos_geral/2020/{}".format(img_name)
@@ -197,6 +213,7 @@ def generarIndexDirs(path, platilla_html):
             if file.endswith(".webp") or file.endswith(".jpg") or file.endswith(".png") or file.endswith(".svg"):
                 img_list.append(file)
                 img_name = file
+                dimension_imagen=getDimensionImagen(archivo)
 
                 path_corto=archivo.replace(path,'')
                 path_corto=NameDir +path_corto
@@ -209,20 +226,23 @@ def generarIndexDirs(path, platilla_html):
                 #url_imagen = "https://cesar23.github.io/{}".format(img_name)
 
                 min_template = """
-                <div class="col-md-3">
+                   <div class="col-md-3">
                             <div class="card">
                                 <img class="card-img-bottom img-fluid"
                                     src="https://www.solodev.com/_/images/client-loader.gif" loading="lazy" data-src="{url_imagen}"/>
                                 <div class="card-body">
                                     <h6 class="card-title">{name_imagen}</h6>
-                                    <p class="card-text">peso de archivo es:{peso}</p>
+                                    <p class="card-text">peso de archivo es: <strong>{peso}</strong><br>
+                                        link es : <a href="{url_imagen}">{url_imagen}</a>  <br>
+                                        Dimensiones: {dimensiones}
+                                     </p>
                                     <a href="{url_imagen}" class="btn btn-primary">Ver</a>
                                 </div>
         
                             </div>
                         </div>
                 
-                """.format(url_imagen=url_imagen, name_imagen=img_name,peso=peso_archivo)
+                """.format(url_imagen=url_imagen, name_imagen=img_name,peso=peso_archivo,dimensiones=dimension_imagen)
 
                 #
                 # str ="https://cesar23.github.io/web_cursos_geral/2020/{}".format(img_name)
@@ -267,18 +287,27 @@ def generarIndexDirs(path, platilla_html):
 # salida = input("Pulsar [enter para salir]")
 
 # folder-name
-path = r"D:\repos\cdn_webs"
+# path = r"D:\repos\cdn_webs"
 # quality of produced .webp images [0-100]
 
+
+
+print("-------------------------------------------------------------------------")
+print("--- Generamos  el  index que  recorre  todas los  subdirectorios---------------------")
+print("-------------------------------------------------------------------------")
 currentDir = os.path.abspath(__file__)
 currentDir = os.path.dirname(currentDir)
 
 generarIndex(currentDir, plantilla)
 
-print("-------------------------------------------------------------------------")
-print("-----------------Filtramos solo las imagenes [jps,png]---------------------")
-print("-------------------------------------------------------------------------")
 
+
+
+
+
+print("-------------------------------------------------------------------------")
+print("--- Recorremos las  carpetas  y generamos  su  index ---------------------")
+print("-------------------------------------------------------------------------")
 #--------------------para setear carpeta
 
 
