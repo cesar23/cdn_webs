@@ -16,6 +16,7 @@ from glob import glob
 
 from Config import *
 
+
 def humanbytes(B):
     'Return the given bytes as a human friendly KB, MB, GB, or TB string'
     B = float(B)
@@ -34,8 +35,6 @@ def humanbytes(B):
         return '{0:.2f} GB'.format(B/GB)
     elif TB <= B:
         return '{0:.2f} TB'.format(B/TB)
-
-
 
 
 
@@ -96,8 +95,18 @@ plantilla = """
         <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
             <div class="position-sticky pt-3">
                 <ul class="nav flex-column">
-                   
-                    {{%LINKS%}}
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">
+                            <span data-feather="home"></span>
+                            Inicio
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="file"></span>
+                            Orders
+                        </a>
+                    </li>
 
                 </ul>
 
@@ -157,7 +166,7 @@ plantilla = """
 def getCurrentNameDir():
     abspath = os.path.abspath(__file__)
     dirname = os.path.dirname(abspath)
-    return dirname
+    return  os.path.basename(dirname)
 
 def generarIndex(path, platilla_html):
     global plantilla
@@ -165,7 +174,6 @@ def generarIndex(path, platilla_html):
     img_list = []
     excludeDirs = ['.git', '.idea', 'Config']
     salida_html = ''
-    links_navs=''
 
     NameDir =getCurrentNameDir()
 
@@ -192,24 +200,12 @@ def generarIndex(path, platilla_html):
                 img_name = file
 
                 path_corto=archivo.replace(path,'')
-                # path_corto=NameDir +path_corto
-                path_corto=path_corto.replace('\\','/').replace('//','/').replace('///','/')
+                path_corto=NameDir +path_corto
+                path_corto=path_corto.replace('\\','/').replace('//','/')
 
-                pathServer=path_corto
+                pathServer=path_corto.replace('//','/')
                 # url_imagen ="https://cesar23.github.io{}".format(pathServer)
-                url_imagen =CONFIG['server']+"/"+CONFIG['dirRoot']+"{}".format(pathServer)
-
-
-
-                # if NameDir != '':
-                #     NameDir = re.sub(r'(?is):.+', '', NameDir)
-                #     img_name = "{}/{}".format(NameDir, file)
-                #     img_name=img_name.replace('\\','/').replace('//','/')
-                #
-                # pathServer ="/cdn_webs/{}".format(img_name)
-                # pathServer=pathServer.replace('//','/')
-                # # url_imagen ="https://cesar23.github.io{}".format(pathServer)
-                # url_imagen =CONFIG['server']+"{}".format(pathServer)
+                url_imagen =CONFIG['server']+"/"+CONFIG['dirRoot']+"/{}".format(pathServer)
 
                 #url_imagen = "https://cesar23.github.io/{}".format(img_name)
 
@@ -238,20 +234,7 @@ def generarIndex(path, platilla_html):
                 # call(cmd, shell=False)
                 # print(cmd)    # for debug
 
-
-    for clave, valor in CONFIG['links'].items():
-        links_navs+="""
-         <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{nav_link}">
-                        <span data-feather="home"></span>
-                        {nav_name}
-                    </a>
-                </li>
-        """.format(nav_name=clave,nav_link=valor)
-
-
     platilla_nueva = platilla_html.replace('{{%LISTADO%}}', salida_html)
-    platilla_nueva = platilla_nueva.replace('{{%LINKS%}}', links_navs)
     with open('index.html', "w", encoding='utf-8') as file:
         file.write(platilla_nueva)
 
