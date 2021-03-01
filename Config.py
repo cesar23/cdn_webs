@@ -1,4 +1,6 @@
 import sys, os,re
+import time,os
+import datetime
 
 def getCurrentNameDir():
     abspath = os.path.abspath(__file__)
@@ -9,14 +11,18 @@ def getCurrentNameDir():
 SERVER='https://cesar23.github.io'
 SERVER_PATH_URL=SERVER+"/"+ getCurrentNameDir()
 
+tiemp = int(time.time())
+
+
+
 CONFIG = {
     'server': SERVER,
     'dirRoot': getCurrentNameDir(),
     'directorios':["camicv","pcbyte"],
     'links':{
-        "carpeta -> index":SERVER_PATH_URL+"/index.html",
-        "carpeta -> camicv":SERVER_PATH_URL+"/camicv/index.html",
-        "carpeta -> pcbyte":SERVER_PATH_URL+"/pcbyte/index.html",
+        "carpeta -> index":SERVER_PATH_URL+"/index.html"+"?aletorio="+str(tiemp),
+        "carpeta -> camicv":SERVER_PATH_URL+"/camicv/index.html"+"?aletorio="+str(tiemp),
+        "carpeta -> pcbyte":SERVER_PATH_URL+"/pcbyte/index.html"+"?aletorio="+str(tiemp),
     },
 
     'plantillaGlobal' : """
