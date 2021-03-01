@@ -22,9 +22,6 @@ function gitup2() {
 
 function compilar() {
     python listar_img_webp.py
-    python camicv/listar_interno.py
-
-
 }
 
 

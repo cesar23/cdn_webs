@@ -1,25 +1,4 @@
-import sys, os,re
 
-def getCurrentNameDir():
-    abspath = os.path.abspath(__file__)
-    dirname = os.path.dirname(abspath)
-    return  os.path.basename(dirname)
-
-
-SERVER='https://cesar23.github.io'
-SERVER_PATH_URL=SERVER+"/"+ getCurrentNameDir()
-
-CONFIG = {
-    'server': SERVER,
-    'dirRoot': getCurrentNameDir(),
-    'directorios':["camicv","pcbyte"],
-    'links':{
-        "carpeta -> index":SERVER_PATH_URL+"/index.html",
-        "carpeta -> camicv":SERVER_PATH_URL+"/camicv/index.html",
-        "carpeta -> pcbyte":SERVER_PATH_URL+"/pcbyte/index.html",
-    },
-
-    'plantillaGlobal' : """
 <!doctype html>
 <html lang="en">
 <head>
@@ -72,7 +51,28 @@ CONFIG = {
             <div class="position-sticky pt-3">
                 <ul class="nav flex-column">
                    
-                    {{%LINKS%}}
+                    
+     <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="https://cesar23.github.io/cdn_webs/index.html">
+                    <span data-feather="home"></span>
+                    carpeta -> index
+                </a>
+            </li>
+    
+     <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="https://cesar23.github.io/cdn_webs/camicv/index.html">
+                    <span data-feather="home"></span>
+                    carpeta -> camicv
+                </a>
+            </li>
+    
+     <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="https://cesar23.github.io/cdn_webs/pcbyte/index.html">
+                    <span data-feather="home"></span>
+                    carpeta -> pcbyte
+                </a>
+            </li>
+    
 
                 </ul>
 
@@ -83,7 +83,7 @@ CONFIG = {
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Drirectorio: {{%CURRENT_DIR%}}</h1>
+                <h1 class="h2">Drirectorio: cdn_webs/pcbyte</h1>
 
             </div>
 
@@ -92,7 +92,22 @@ CONFIG = {
             
             
             
-                {{%LISTADO%}}
+                
+                <div class="col-md-3">
+                            <div class="card">
+                                <img class="card-img-bottom img-fluid"
+                                    src="https://www.solodev.com/_/images/client-loader.gif" loading="lazy" data-src="https://cesar23.github.io/cdn_webs/pcbyte/assets/1.jpg"/>
+                                <div class="card-body">
+                                    <h6 class="card-title">1.jpg</h6>
+                                    <p class="card-text">peso de archivo es:119.83 KB</p>
+                                    <a href="https://cesar23.github.io/cdn_webs/pcbyte/assets/1.jpg" class="btn btn-primary">Ver</a>
+                                </div>
+        
+                            </div>
+                        </div>
+                
+                
+
 
             </div>
 
@@ -126,5 +141,3 @@ CONFIG = {
 </body>
 </html>
 
-"""
-}

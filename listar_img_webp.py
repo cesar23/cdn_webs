@@ -152,6 +152,106 @@ def generarIndex(path, platilla_html):
         file.write(platilla_nueva)
 
 
+
+
+
+
+
+
+
+
+
+
+
+def generarIndexDirs(path, platilla_html):
+    global plantilla
+
+    img_list = []
+    excludeDirs = ['.git', '.idea', 'Config']
+    salida_html = ''
+    links_navs=''
+
+
+
+
+    NameDir =os.path.basename(path)
+
+    for dirpath, dirnames, filenames in os.walk(path, topdown=True):
+        [dirnames.remove(d) for d in list(dirnames) if d in excludeDirs]
+        # if dirpath.endswith(".git") or dirpath.endswith(".idea") or dirpath.endswith("Config")or dirpath.endswith("libs"):
+        #     continue
+
+        print('\nruta       :', dirpath)
+        # NameDir = dirpath.replace(getCurrentNameDir(),'')
+
+        print("Nombre Carpeta : " +NameDir)
+
+
+        for file in filenames:
+            archivo = dirpath + os.sep + file
+            sizeBytesfile = os.path.getsize(archivo)
+            peso_archivo=humanbytes(sizeBytesfile)
+            print('path_archivo :', archivo)
+            # se pueden utilizar más tipos de imágenes (bmp, tiff, gif)
+            # if file.endswith(".jpg") or file.endswith(".png") or file.endswith(".jpeg"):
+            if file.endswith(".webp") or file.endswith(".jpg") or file.endswith(".png") or file.endswith(".svg"):
+                img_list.append(file)
+                img_name = file
+
+                path_corto=archivo.replace(path,'')
+                path_corto=NameDir +path_corto
+                path_corto=path_corto.replace('\\','/').replace('//','/')
+
+                pathServer=path_corto.replace('//','/')
+                # url_imagen ="https://cesar23.github.io{}".format(pathServer)
+                url_imagen =CONFIG['server']+"/"+CONFIG['dirRoot']+"/{}".format(pathServer)
+
+                #url_imagen = "https://cesar23.github.io/{}".format(img_name)
+
+                min_template = """
+                <div class="col-md-3">
+                            <div class="card">
+                                <img class="card-img-bottom img-fluid"
+                                    src="https://www.solodev.com/_/images/client-loader.gif" loading="lazy" data-src="{url_imagen}"/>
+                                <div class="card-body">
+                                    <h6 class="card-title">{name_imagen}</h6>
+                                    <p class="card-text">peso de archivo es:{peso}</p>
+                                    <a href="{url_imagen}" class="btn btn-primary">Ver</a>
+                                </div>
+        
+                            </div>
+                        </div>
+                
+                """.format(url_imagen=url_imagen, name_imagen=img_name,peso=peso_archivo)
+
+                #
+                # str ="https://cesar23.github.io/web_cursos_geral/2020/{}".format(img_name)
+                # str= '<a href="{}">{}</a> <br>'.format(str,str)
+                # print(str )
+                salida_html += min_template + '\n'
+                # running the above command
+                # call(cmd, shell=False)
+                # print(cmd)    # for debug
+
+
+    for clave, valor in CONFIG['links'].items():
+        links_navs+="""
+     <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{nav_link}">
+                    <span data-feather="home"></span>
+                    {nav_name}
+                </a>
+            </li>
+    """.format(nav_name=clave,nav_link=valor)
+
+    platilla_nueva = platilla_html.replace('{{%LISTADO%}}', salida_html)
+    platilla_nueva = platilla_nueva.replace('{{%LINKS%}}', links_navs)
+    platilla_nueva = platilla_nueva.replace('{{%CURRENT_DIR%}}', CONFIG['dirRoot']+"/"+NameDir)
+    with open('index.html', "w", encoding='utf-8') as file:
+        file.write(platilla_nueva)
+
+
+
 #
 # for img_name in glob(path+'/*'):
 #     # se pueden utilizar más tipos de imágenes (bmp, tiff, gif)
@@ -179,4 +279,20 @@ print("-------------------------------------------------------------------------
 print("-----------------Filtramos solo las imagenes [jps,png]---------------------")
 print("-------------------------------------------------------------------------")
 
+#--------------------para setear carpeta
 
+
+
+# new_directorio=currentDir + os.sep +'camicv'
+# os.chdir(new_directorio)
+# generarIndexDirs(new_directorio,plantilla)
+#
+# new_directorio=currentDir + os.sep +'pcbyte'
+# os.chdir(new_directorio)
+# generarIndexDirs(new_directorio,plantilla)
+
+for directorio in CONFIG['directorios']:
+
+    new_directorio=currentDir + os.sep +directorio
+    os.chdir(new_directorio)
+    generarIndexDirs(new_directorio,plantilla)
