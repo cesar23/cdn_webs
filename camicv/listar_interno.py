@@ -14,7 +14,11 @@ import time
 from subprocess import call
 from glob import glob
 
-from ..Config import *
+import os, sys
+script_path = os.path.realpath(os.path.dirname(__name__))
+os.chdir(script_path)
+sys.path.append("..")
+from Config import *
 
 
 def humanbytes(B):
