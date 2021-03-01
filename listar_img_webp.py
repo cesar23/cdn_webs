@@ -132,6 +132,7 @@ def generarIndex(path, platilla_html):
                                         link es : <a href="{url_imagen}">{url_imagen}</a>  <br>
                                         Dimensiones: {dimensiones}
                                      </p>
+                                     <button class="btn-clip" onclick="copiarAlPortapapeles2(this)">Copiar Link Imagen</button>
                                     <a href="{url_imagen}" class="btn btn-primary">Ver</a>
                                 </div>
         
@@ -236,6 +237,7 @@ def generarIndexDirs(path, platilla_html):
                                         link es : <a href="{url_imagen}">{url_imagen}</a>  <br>
                                         Dimensiones: {dimensiones}
                                      </p>
+                                     <button class="btn-clip" onclick="copiarAlPortapapeles2(this)">Copiar Link Imagen</button>
                                     <a href="{url_imagen}" class="btn btn-primary">Ver</a>
                                 </div>
         

@@ -128,6 +128,18 @@ CONFIG = {
         'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js';
     document.body.appendChild(script);
 }
+
+
+  function copiarAlPortapapeles2(obj) {
+        elemento=obj;
+        link=elemento.parentElement.querySelector('a').innerHTML;
+        var aux = document.createElement("input");
+        aux.setAttribute("value",link);
+        document.body.appendChild(aux);
+        aux.select();
+        document.execCommand("copy");
+        document.body.removeChild(aux);
+    }
 </script>
 </body>
 </html>

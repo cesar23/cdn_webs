@@ -53,21 +53,21 @@
                    
                     
      <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="https://cesar23.github.io/cdn_webs/index.html?aletorio=1614616090">
+                <a class="nav-link active" aria-current="page" href="https://cesar23.github.io/cdn_webs/index.html?aletorio=1614629396">
                     <span data-feather="home"></span>
                     carpeta -> index
                 </a>
             </li>
     
      <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="https://cesar23.github.io/cdn_webs/camicv/index.html?aletorio=1614616090">
+                <a class="nav-link active" aria-current="page" href="https://cesar23.github.io/cdn_webs/camicv/index.html?aletorio=1614629396">
                     <span data-feather="home"></span>
                     carpeta -> camicv
                 </a>
             </li>
     
      <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="https://cesar23.github.io/cdn_webs/pcbyte/index.html?aletorio=1614616090">
+                <a class="nav-link active" aria-current="page" href="https://cesar23.github.io/cdn_webs/pcbyte/index.html?aletorio=1614629396">
                     <span data-feather="home"></span>
                     carpeta -> pcbyte
                 </a>
@@ -103,6 +103,7 @@
                                         link es : <a href="https://cesar23.github.io/cdn_webs/pcbyte/assets/1.jpg">https://cesar23.github.io/cdn_webs/pcbyte/assets/1.jpg</a>  <br>
                                         Dimensiones: ancho 800px - alto 600px
                                      </p>
+                                     <button class="btn-clip" onclick="copiarAlPortapapeles2(this)">Copiar Link Imagen</button>
                                     <a href="https://cesar23.github.io/cdn_webs/pcbyte/assets/1.jpg" class="btn btn-primary">Ver</a>
                                 </div>
         
@@ -140,6 +141,18 @@
         'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js';
     document.body.appendChild(script);
 }
+
+
+  function copiarAlPortapapeles2(obj) {
+        elemento=obj;
+        link=elemento.parentElement.querySelector('a').innerHTML;
+        var aux = document.createElement("input");
+        aux.setAttribute("value",link);
+        document.body.appendChild(aux);
+        aux.select();
+        document.execCommand("copy");
+        document.body.removeChild(aux);
+    }
 </script>
 </body>
 </html>
