@@ -14,7 +14,7 @@ import time
 from subprocess import call
 from glob import glob
 
-from Config import *
+from ..Config import *
 
 
 def humanbytes(B):
