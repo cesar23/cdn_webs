@@ -1,7 +1,7 @@
 import sys, os,re
 import time,os
 import datetime
-
+from datetime import datetime
 def getCurrentNameDir():
     abspath = os.path.abspath(__file__)
     dirname = os.path.dirname(abspath)
@@ -11,8 +11,12 @@ def getCurrentNameDir():
 SERVER='https://cesar23.github.io'
 SERVER_PATH_URL=SERVER+"/"+ getCurrentNameDir()
 
-tiemp = int(time.time())
 
+# current date and time
+now = datetime.now()
+timestamp = datetime.timestamp(now)
+
+tiemp = now.strftime("%Y-%m-%d_%H-%M-%S")
 
 
 CONFIG = {
