@@ -27,6 +27,7 @@ CONFIG = {
         "carpeta -> index":SERVER_PATH_URL+"/index.html"+"?aletorio="+str(tiemp),
         "carpeta -> camicv":SERVER_PATH_URL+"/camicv/index.html"+"?aletorio="+str(tiemp),
         "carpeta -> pcbyte":SERVER_PATH_URL+"/pcbyte/index.html"+"?aletorio="+str(tiemp),
+        "carpeta -> webcursos":SERVER_PATH_URL+"/webcursos/index.html"+"?aletorio="+str(tiemp),
     },
 
     'plantillaGlobal' : """
