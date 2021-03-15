@@ -22,7 +22,7 @@ tiemp = now.strftime("%Y-%m-%d_%H-%M-%S")
 CONFIG = {
     'server': SERVER,
     'dirRoot': getCurrentNameDir(),
-    'directorios':["camicv","pcbyte"],
+    'directorios':["camicv","pcbyte","webcursos"], #IMPORTANTE AQUI
     'links':{
         "carpeta -> index":SERVER_PATH_URL+"/index.html"+"?aletorio="+str(tiemp),
         "carpeta -> camicv":SERVER_PATH_URL+"/camicv/index.html"+"?aletorio="+str(tiemp),

@@ -321,6 +321,12 @@ print("-------------------------------------------------------------------------
 # new_directorio=currentDir + os.sep +'pcbyte'
 # os.chdir(new_directorio)
 # generarIndexDirs(new_directorio,plantilla)
+#
+# new_directorio=currentDir + os.sep +'pcbyte'
+# os.chdir(new_directorio)
+# generarIndexDirs(new_directorio,plantilla)
+
+
 
 for directorio in CONFIG['directorios']:
 
