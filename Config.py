@@ -22,7 +22,7 @@ tiemp = now.strftime("%Y-%m-%d_%H-%M-%S")
 CONFIG = {
     'server': SERVER,
     'dirRoot': getCurrentNameDir(),
-    'directorios':["camicv","pcbyte","webcursos","lissacorp","soluciones-tools"], #IMPORTANTE AQUI
+    'directorios':["camicv","pcbyte","webcursos","lissacorp","soluciones-tools","importaciones"], #IMPORTANTE AQUI
     'links':{
         "carpeta -> index":SERVER_PATH_URL+"/index.html"+"?aletorio="+str(tiemp),
         "carpeta -> soluciones-tools":SERVER_PATH_URL+"/soluciones-tools/index.html"+"?aletorio="+str(tiemp),
@@ -30,6 +30,7 @@ CONFIG = {
         "carpeta -> pcbyte":SERVER_PATH_URL+"/pcbyte/index.html"+"?aletorio="+str(tiemp),
         "carpeta -> webcursos":SERVER_PATH_URL+"/webcursos/index.html"+"?aletorio="+str(tiemp),
         "carpeta -> lissacorp":SERVER_PATH_URL+"/lissacorp/index.html"+"?aletorio="+str(tiemp),
+        "carpeta -> importaciones":SERVER_PATH_URL+"/importaciones/index.html"+"?aletorio="+str(tiemp),
     },
 
     'plantillaGlobal' : """
