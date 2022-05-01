@@ -31,6 +31,7 @@ CONFIG = {
         "carpeta -> webcursos":SERVER_PATH_URL+"/webcursos/index.html"+"?aletorio="+str(tiemp),
         "carpeta -> lissacorp":SERVER_PATH_URL+"/lissacorp/index.html"+"?aletorio="+str(tiemp),
         "carpeta -> importaciones":SERVER_PATH_URL+"/importaciones/index.html"+"?aletorio="+str(tiemp),
+         "carpeta -> tareastore":SERVER_PATH_URL+"/tareastore/index.html"+"?aletorio="+str(tiemp),
     },
 
     'plantillaGlobal' : """
