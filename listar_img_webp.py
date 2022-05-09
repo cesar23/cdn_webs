@@ -9,60 +9,58 @@ ejecutar desde la consola
 
 """
 
-import sys, os,re
+import sys, os, re
 import time
 from subprocess import call
 from glob import glob
 import cv2
 from Config import *
 
+
 def humanbytes(B):
     'Return the given bytes as a human friendly KB, MB, GB, or TB string'
     B = float(B)
     KB = float(1024)
-    MB = float(KB ** 2) # 1,048,576
-    GB = float(KB ** 3) # 1,073,741,824
-    TB = float(KB ** 4) # 1,099,511,627,776
+    MB = float(KB ** 2)  # 1,048,576
+    GB = float(KB ** 3)  # 1,073,741,824
+    TB = float(KB ** 4)  # 1,099,511,627,776
 
     if B < KB:
-        return '{0} {1}'.format(B,'Bytes' if 0 == B > 1 else 'Byte')
+        return '{0} {1}'.format(B, 'Bytes' if 0 == B > 1 else 'Byte')
     elif KB <= B < MB:
-        return '{0:.2f} KB'.format(B/KB)
+        return '{0:.2f} KB'.format(B / KB)
     elif MB <= B < GB:
-        return '{0:.2f} MB'.format(B/MB)
+        return '{0:.2f} MB'.format(B / MB)
     elif GB <= B < TB:
-        return '{0:.2f} GB'.format(B/GB)
+        return '{0:.2f} GB'.format(B / GB)
     elif TB <= B:
-        return '{0:.2f} TB'.format(B/TB)
-
-
-
-
+        return '{0:.2f} TB'.format(B / TB)
 
 
 plantilla = CONFIG['plantillaGlobal']
 
-def getDimensionImagen(path_file):
 
+def getDimensionImagen(path_file):
     try:
         image = cv2.imread(path_file)
-        ancho = image.shape[1] #columnas
-        alto = image.shape[0] # filas
-        return "ancho {}px - alto {}px".format(ancho,alto)
+        ancho = image.shape[1]  # columnas
+        alto = image.shape[0]  # filas
+        return "ancho {}px - alto {}px".format(ancho, alto)
     except:
         return "no  tiene  dimensiones"
-
 
 
 def getCurrentNameDir():
     abspath = os.path.abspath(__file__)
     dirname = os.path.dirname(abspath)
-    return  os.path.basename(dirname)
+    return os.path.basename(dirname)
+
 
 def getCurrentDir():
     abspath = os.path.abspath(__file__)
     dirname = os.path.dirname(abspath)
     return dirname
+
 
 def generarIndex(path, platilla_html):
     global plantilla
@@ -70,9 +68,9 @@ def generarIndex(path, platilla_html):
     img_list = []
     excludeDirs = ['.git', '.idea', 'Config']
     salida_html = ''
-    links_navs=''
+    links_navs = ''
 
-    NameDir =getCurrentDir()
+    NameDir = getCurrentDir()
 
     for dirpath, dirnames, filenames in os.walk(path, topdown=True):
         [dirnames.remove(d) for d in list(dirnames) if d in excludeDirs]
@@ -82,32 +80,27 @@ def generarIndex(path, platilla_html):
         print('\nruta       :', dirpath)
         # NameDir = dirpath.replace(getCurrentNameDir(),'')
 
-        print("Nombre Carpeta : " +NameDir)
-
+        print("Nombre Carpeta : " + NameDir)
 
         for file in filenames:
             archivo = dirpath + os.sep + file
             sizeBytesfile = os.path.getsize(archivo)
-            peso_archivo=humanbytes(sizeBytesfile)
+            peso_archivo = humanbytes(sizeBytesfile)
             print('path_archivo :', archivo)
             # se pueden utilizar más tipos de imágenes (bmp, tiff, gif)
             # if file.endswith(".jpg") or file.endswith(".png") or file.endswith(".jpeg"):
             if file.endswith(".webp") or file.endswith(".jpg") or file.endswith(".png") or file.endswith(".svg"):
                 img_list.append(file)
                 img_name = file
-                dimension_imagen=getDimensionImagen(archivo)
+                dimension_imagen = getDimensionImagen(archivo)
 
-
-
-                path_corto=archivo.replace(path,'')
+                path_corto = archivo.replace(path, '')
                 # path_corto=NameDir +path_corto
-                path_corto=path_corto.replace('\\','/').replace('//','/').replace('///','/')
+                path_corto = path_corto.replace('\\', '/').replace('//', '/').replace('///', '/')
 
-                pathServer=path_corto
+                pathServer = path_corto
                 # url_imagen ="https://cesar23.github.io{}".format(pathServer)
-                url_imagen =CONFIG['server']+"/"+CONFIG['dirRoot']+"{}".format(pathServer)
-
-
+                url_imagen = CONFIG['server'] + "/" + CONFIG['dirRoot'] + "{}".format(pathServer)
 
                 # if NameDir != '':
                 #     NameDir = re.sub(r'(?is):.+', '', NameDir)
@@ -119,7 +112,7 @@ def generarIndex(path, platilla_html):
                 # # url_imagen ="https://cesar23.github.io{}".format(pathServer)
                 # url_imagen =CONFIG['server']+"{}".format(pathServer)
 
-                #url_imagen = "https://cesar23.github.io/{}".format(img_name)
+                # url_imagen = "https://cesar23.github.io/{}".format(img_name)
 
                 min_template = """
                    <div class="col-md-3">
@@ -139,7 +132,7 @@ def generarIndex(path, platilla_html):
                             </div>
                         </div>
                 
-                """.format(url_imagen=url_imagen, name_imagen=img_name,peso=peso_archivo,dimensiones=dimension_imagen)
+                """.format(url_imagen=url_imagen, name_imagen=img_name, peso=peso_archivo, dimensiones=dimension_imagen)
 
                 #
                 # str ="https://cesar23.github.io/web_cursos_geral/2020/{}".format(img_name)
@@ -150,17 +143,15 @@ def generarIndex(path, platilla_html):
                 # call(cmd, shell=False)
                 # print(cmd)    # for debug
 
-
     for clave, valor in CONFIG['links'].items():
-        links_navs+="""
+        links_navs += """
          <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{nav_link}">
                         <span data-feather="home"></span>
                         {nav_name}
                     </a>
                 </li>
-        """.format(nav_name=clave,nav_link=valor)
-
+        """.format(nav_name=clave, nav_link=valor)
 
     platilla_nueva = platilla_html.replace('{{%LISTADO%}}', salida_html)
     platilla_nueva = platilla_nueva.replace('{{%LINKS%}}', links_navs)
@@ -169,29 +160,15 @@ def generarIndex(path, platilla_html):
         file.write(platilla_nueva)
 
 
-
-
-
-
-
-
-
-
-
-
-
 def generarIndexDirs(path, platilla_html):
     global plantilla
 
     img_list = []
     excludeDirs = ['.git', '.idea', 'Config']
     salida_html = ''
-    links_navs=''
+    links_navs = ''
 
-
-
-
-    NameDir =os.path.basename(path)
+    NameDir = os.path.basename(path)
 
     for dirpath, dirnames, filenames in os.walk(path, topdown=True):
         [dirnames.remove(d) for d in list(dirnames) if d in excludeDirs]
@@ -201,30 +178,29 @@ def generarIndexDirs(path, platilla_html):
         print('\nruta       :', dirpath)
         # NameDir = dirpath.replace(getCurrentNameDir(),'')
 
-        print("Nombre Carpeta : " +NameDir)
-
+        print("Nombre Carpeta : " + NameDir)
 
         for file in filenames:
             archivo = dirpath + os.sep + file
             sizeBytesfile = os.path.getsize(archivo)
-            peso_archivo=humanbytes(sizeBytesfile)
+            peso_archivo = humanbytes(sizeBytesfile)
             print('path_archivo :', archivo)
             # se pueden utilizar más tipos de imágenes (bmp, tiff, gif)
             # if file.endswith(".jpg") or file.endswith(".png") or file.endswith(".jpeg"):
-            if file.endswith(".webp") or file.endswith(".jpg") or file.endswith(".png") or file.endswith(".svg"):
+            if file.endswith(".webp") or file.endswith(".jpg") or file.endswith(".png") or file.endswith(".svg") or file.endswith(".gif"):
                 img_list.append(file)
                 img_name = file
-                dimension_imagen=getDimensionImagen(archivo)
+                dimension_imagen = getDimensionImagen(archivo)
 
-                path_corto=archivo.replace(path,'')
-                path_corto=NameDir +path_corto
-                path_corto=path_corto.replace('\\','/').replace('//','/')
+                path_corto = archivo.replace(path, '')
+                path_corto = NameDir + path_corto
+                path_corto = path_corto.replace('\\', '/').replace('//', '/')
 
-                pathServer=path_corto.replace('//','/')
+                pathServer = path_corto.replace('//', '/')
                 # url_imagen ="https://cesar23.github.io{}".format(pathServer)
-                url_imagen =CONFIG['server']+"/"+CONFIG['dirRoot']+"/{}".format(pathServer)
+                url_imagen = CONFIG['server'] + "/" + CONFIG['dirRoot'] + "/{}".format(pathServer)
 
-                #url_imagen = "https://cesar23.github.io/{}".format(img_name)
+                # url_imagen = "https://cesar23.github.io/{}".format(img_name)
 
                 min_template = """
                    <div class="col-md-3">
@@ -244,7 +220,7 @@ def generarIndexDirs(path, platilla_html):
                             </div>
                         </div>
                 
-                """.format(url_imagen=url_imagen, name_imagen=img_name,peso=peso_archivo,dimensiones=dimension_imagen)
+                """.format(url_imagen=url_imagen, name_imagen=img_name, peso=peso_archivo, dimensiones=dimension_imagen)
 
                 #
                 # str ="https://cesar23.github.io/web_cursos_geral/2020/{}".format(img_name)
@@ -255,23 +231,21 @@ def generarIndexDirs(path, platilla_html):
                 # call(cmd, shell=False)
                 # print(cmd)    # for debug
 
-
     for clave, valor in CONFIG['links'].items():
-        links_navs+="""
+        links_navs += """
      <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="{nav_link}">
                     <span data-feather="home"></span>
                     {nav_name}
                 </a>
             </li>
-    """.format(nav_name=clave,nav_link=valor)
+    """.format(nav_name=clave, nav_link=valor)
 
     platilla_nueva = platilla_html.replace('{{%LISTADO%}}', salida_html)
     platilla_nueva = platilla_nueva.replace('{{%LINKS%}}', links_navs)
-    platilla_nueva = platilla_nueva.replace('{{%CURRENT_DIR%}}', CONFIG['dirRoot']+"/"+NameDir)
+    platilla_nueva = platilla_nueva.replace('{{%CURRENT_DIR%}}', CONFIG['dirRoot'] + "/" + NameDir)
     with open('index.html', "w", encoding='utf-8') as file:
         file.write(platilla_nueva)
-
 
 
 #
@@ -293,7 +267,6 @@ def generarIndexDirs(path, platilla_html):
 # quality of produced .webp images [0-100]
 
 
-
 print("-------------------------------------------------------------------------")
 print("--- Generamos  el  index que  recorre  todas los  subdirectorios---------------------")
 print("-------------------------------------------------------------------------")
@@ -302,16 +275,10 @@ currentDir = os.path.dirname(currentDir)
 
 generarIndex(currentDir, plantilla)
 
-
-
-
-
-
 print("-------------------------------------------------------------------------")
 print("--- Recorremos las  carpetas  y generamos  su  index ---------------------")
 print("-------------------------------------------------------------------------")
-#--------------------para setear carpeta
-
+# --------------------para setear carpeta
 
 
 # new_directorio=currentDir + os.sep +'camicv'
@@ -327,9 +294,7 @@ print("-------------------------------------------------------------------------
 # generarIndexDirs(new_directorio,plantilla)
 
 
-
 for directorio in CONFIG['directorios']:
-
-    new_directorio=currentDir + os.sep +directorio
+    new_directorio = currentDir + os.sep + directorio
     os.chdir(new_directorio)
-    generarIndexDirs(new_directorio,plantilla)
+    generarIndexDirs(new_directorio, plantilla)
