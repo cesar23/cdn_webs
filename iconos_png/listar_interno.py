@@ -76,7 +76,7 @@ def generarIndex(path, platilla_html):
             print('path_archivo :', archivo)
             # se pueden utilizar más tipos de imágenes (bmp, tiff, gif)
             # if file.endswith(".jpg") or file.endswith(".png") or file.endswith(".jpeg"):
-            if file.endswith(".webp") or file.endswith(".jpg")or file.endswith(".gif") or file.endswith(".png") or file.endswith(".svg"):
+            if file.endswith(".webp") or file.endswith(".jpg") or file.endswith(".gif") or file.endswith(".png") or file.endswith(".svg"):
                 img_list.append(file)
                 img_name = file
 
@@ -157,5 +157,5 @@ currentDir = os.path.dirname(currentDir)
 generarIndex(currentDir, plantilla)
 
 print("-------------------------------------------------------------------------")
-print("-----------------Filtramos solo las imagenes [jpg,png,gif,svg]---------------------")
+print("-----------------Filtramos solo las imagenes [jps,png]---------------------")
 print("-------------------------------------------------------------------------")
