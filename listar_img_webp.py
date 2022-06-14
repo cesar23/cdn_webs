@@ -57,7 +57,7 @@ def get_imagen_details(path_file):
         image = cv2.imread(path_file)
         ancho = image.shape[1]  # columnas
         alto = image.shape[0]  # filas
-        return {"width": ancho, "height": alto}
+        return {"width": str(ancho), "height": str(alto)}
     except:
         return "no  tiene  dimensiones"
 
