@@ -57,9 +57,9 @@ def get_imagen_details(path_file):
         image = cv2.imread(path_file)
         ancho = image.shape[1]  # columnas
         alto = image.shape[0]  # filas
-        return {"info_status":"ok","width": str(ancho), "height": str(alto)}
+        return {"info_status":"ok","info_msg":"","width": str(ancho), "height": str(alto)}
     except:
-        return {"info_status":"Error no es una imagen que pueda obtener las dimensiones","width": "50", "height": "50"}
+        return {"info_status":"Error","info_msg":"No se pudo obtener dimensiones","width": "50", "height": "50"}
 
 def getDimensionImagen(path_file):
     try:
@@ -136,6 +136,9 @@ def generarIndex(path, platilla_html):
                 # url_imagen =CONFIG['server']+"{}".format(pathServer)
 
                 # url_imagen = "https://cesar23.github.io/{}".format(img_name)
+                msg_imagen_detail='<span class="badge text-bg-success">Success</span>'
+                if imagen_detail["info_status"] !="ok":
+                    msg_imagen_detail = '<span class="badge text-bg-danger">'+imagen_detail["info_msg"]+'</span>'
 
                 min_template = """
                    <div class="col-md-3">
@@ -159,7 +162,7 @@ def generarIndex(path, platilla_html):
                 """.format(url_imagen=url_imagen,
                            name_imagen=img_name,
                            peso=peso_archivo,
-                           dimensiones="ancho:"+imagen_detail['width']+"px - "+"alto:"+imagen_detail['height']+"px",
+                           dimensiones="ancho:"+imagen_detail['width']+"px - "+"alto:"+imagen_detail['height']+"px"+ msg_imagen_detail,
 
                            ancho_imagen=imagen_detail['width']+"px",
                            alto_imagen=imagen_detail['height']+"px",
