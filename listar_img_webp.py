@@ -375,5 +375,6 @@ for directorio in CONFIG['directorios']:
     generarIndexDirs(new_directorio, plantilla)
 
 
+print("\033[4;35m"+"Texto en negrita y subrayado de color morado")
 time.sleep(2)
 
