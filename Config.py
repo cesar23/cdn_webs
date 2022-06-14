@@ -79,6 +79,11 @@ CONFIG = {
 .card-img, .card-img-bottom, .card-img-top {
     width: auto;
 }
+
+.img-fluid {
+    max-width: 100%;
+    max-height: 100px;
+}
             </style>
 </head>
 <body>
