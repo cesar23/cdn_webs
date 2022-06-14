@@ -59,7 +59,7 @@ def get_imagen_details(path_file):
         alto = image.shape[0]  # filas
         return {"info_status":"ok","width": str(ancho), "height": str(alto)}
     except:
-        return {"info_status":"Error no es una imagen que pueda obtener las dimensiones","width": "100", "height": "100"}
+        return {"info_status":"Error no es una imagen que pueda obtener las dimensiones","width": "50", "height": "50"}
 
 def getDimensionImagen(path_file):
     try:
@@ -159,8 +159,8 @@ def generarIndex(path, platilla_html):
                 """.format(url_imagen=url_imagen,
                            name_imagen=img_name,
                            peso=peso_archivo,
-                           # dimensiones="ancho:"+imagen_detail['width']+" - "+"alto:"+imagen_detail['height']+"",
-                           dimensiones="gggggggggggggg",
+                           dimensiones="ancho:"+imagen_detail['width']+" - "+"alto:"+imagen_detail['height']+"",
+                           
                            ancho_imagen=imagen_detail['width']+"px",
                            alto_imagen=imagen_detail['height']+"px",
                            )
