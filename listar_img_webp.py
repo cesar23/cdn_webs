@@ -259,7 +259,7 @@ def generarIndexDirs(path, platilla_html):
                 """.format(url_imagen=url_imagen,
                            name_imagen=img_name,
                            peso=peso_archivo,
-                           dimensiones="ancho:"+imagen_detail['width']+"px - "+"alto:"+imagen_detail['height']+"px  "+ msg_img_detail,
+                           dimensiones="- ancho:"+imagen_detail['width']+"px - "+"alto:"+imagen_detail['height']+"px  "+ msg_img_detail,
                            ancho_imagen=imagen_detail['width']+"px",
                            alto_imagen=imagen_detail['height']+"px",
                            )
