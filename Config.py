@@ -74,6 +74,11 @@ CONFIG = {
     /* width: 100%; */
      width: auto;
 }
+
+
+.card-img, .card-img-bottom, .card-img-top {
+    width: auto;
+}
             </style>
 </head>
 <body>
