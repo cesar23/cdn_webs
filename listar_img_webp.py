@@ -222,6 +222,7 @@ def generarIndexDirs(path, platilla_html):
                 img_list.append(file)
                 img_name = file
                 dimension_imagen = getDimensionImagen(archivo)
+                imagen_detail = get_imagen_details(archivo)
 
                 path_corto = archivo.replace(path, '')
                 path_corto = NameDir + path_corto
@@ -236,13 +237,14 @@ def generarIndexDirs(path, platilla_html):
                 min_template = """
                    <div class="col-md-3">
                             <div class="card">
-                                <img class="card-img-bottom img-fluid"
+                                <img width="{ancho_imagen}" height="{alto_imagen}" 
+                                class="card-img-bottom img-fluid"
                                     src="https://www.solodev.com/_/images/client-loader.gif" loading="lazy" data-src="{url_imagen}"/>
                                 <div class="card-body">
                                     <h6 class="card-title">{name_imagen}</h6>
                                     <p class="card-text">peso de archivo es: <strong>{peso}</strong><br>
                                         link es : <a href="{url_imagen}">{url_imagen}</a>  <br>
-                                        Dimensiones: {dimensiones}
+                                        info2: {dimensiones}
                                      </p>
                                      <button class="btn-clip" onclick="copiarAlPortapapeles2(this)">Copiar Link Imagen</button>
                                     <a href="{url_imagen}" class="btn btn-primary">Ver</a>
@@ -251,7 +253,14 @@ def generarIndexDirs(path, platilla_html):
                             </div>
                         </div>
                 
-                """.format(url_imagen=url_imagen, name_imagen=img_name, peso=peso_archivo, dimensiones=dimension_imagen)
+                """.format(url_imagen=url_imagen,
+                           name_imagen=img_name,
+                           peso=peso_archivo,
+                           dimensiones="ancho:"+imagen_detail['width']+"px - "+"alto:"+imagen_detail['height']+"px",
+
+                           ancho_imagen=imagen_detail['width']+"px",
+                           alto_imagen=imagen_detail['height']+"px",
+                           )
 
                 #
                 # str ="https://cesar23.github.io/web_cursos_geral/2020/{}".format(img_name)
