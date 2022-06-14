@@ -70,19 +70,12 @@ CONFIG = {
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
             crossorigin="anonymous"></script>
             <style>
-            .card-img, .card-img-bottom, .card-img-top {
-    /* width: 100%; */
-     width: auto;
-}
-
-
-.card-img, .card-img-bottom, .card-img-top {
-    width: auto;
-}
+           
 
 .img-fluid {
-    max-width: 100%;
-    max-height: 100px;
+    /* max-width: 100%; */
+    height: max-content;
+    width: max-content !important;
 }
             </style>
 </head>

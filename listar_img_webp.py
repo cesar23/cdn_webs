@@ -242,9 +242,9 @@ def generarIndexDirs(path, platilla_html):
                                     src="https://www.solodev.com/_/images/client-loader.gif" loading="lazy" data-src="{url_imagen}"/>
                                 <div class="card-body">
                                     <h6 class="card-title">{name_imagen}</h6>
-                                    <p class="card-text">peso de archivo es: <strong>{peso}</strong><br>
-                                        link es : <a href="{url_imagen}">{url_imagen}</a>  <br>
-                                        info2: {dimensiones}
+                                    <p class="card-text">Peso: <strong>{peso}</strong><br>
+                                        link: <a href="{url_imagen}">{url_imagen}</a>  <br>
+                                        info: {dimensiones}
                                      </p>
                                      <button class="btn-clip" onclick="copiarAlPortapapeles2(this)">Copiar Link Imagen</button>
                                     <a href="{url_imagen}" class="btn btn-primary">Ver</a>
