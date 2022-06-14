@@ -250,7 +250,7 @@ def generarIndexDirs(path, platilla_html):
                                     <h6 class="card-title">{name_imagen}</h6>
                                     <p class="card-text">Peso: <strong>{peso}</strong><br>
                                         link: <a href="{url_imagen}">{url_imagen}</a>  <br>
-                                        info3: {dimensiones}
+                                        info: {dimensiones}
                                      </p>
                                      <button class="btn-clip" onclick="copiarAlPortapapeles2(this)">Copiar Link Imagen</button>
                                     <a href="{url_imagen}" class="btn btn-primary">Ver</a>
@@ -262,7 +262,7 @@ def generarIndexDirs(path, platilla_html):
                 """.format(url_imagen=url_imagen,
                            name_imagen=img_name,
                            peso=peso_archivo,
-                           dimensiones="- ancho:"+imagen_detail['width']+"px - "+"alto:"+imagen_detail['height']+"px  "+ msg_img_detail,
+                           dimensiones="ancho:"+imagen_detail['width']+"px - "+"alto:"+imagen_detail['height']+"px  "+ msg_img_detail,
                            ancho_imagen=imagen_detail['width']+"px",
                            alto_imagen=imagen_detail['height']+"px",
                            )
