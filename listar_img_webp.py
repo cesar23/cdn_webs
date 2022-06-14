@@ -1,3 +1,5 @@
+
+
 """
 
 primero poner el  cwebp.exe en windows
@@ -15,6 +17,20 @@ from subprocess import call
 from glob import glob
 import cv2
 from Config import *
+from colorama import Style,Back,Fore, init
+init()
+
+def cls():
+    """comando para limpiar la consola para  uso: cls()
+
+    Returns void
+    -------
+    """
+
+    os.system('cls' if os.name=='nt' else 'clear')
+
+# now, to clear the screen
+
 
 
 def humanbytes(B):
@@ -236,9 +252,9 @@ def generarIndexDirs(path, platilla_html):
                 url_imagen = CONFIG['server'] + "/" + CONFIG['dirRoot'] + "/{}".format(pathServer)
 
                 # url_imagen = "https://cesar23.github.io/{}".format(img_name)
-                msg_img_detail='<span class="badge text-bg-success">Ok</span>'
-                if imagen_detail['info_status'] == False :
-                    msg_img_detail='<span class="badge text-bg-danger">en svg no se pudo calcular</span>'
+                msg_imagen_detail = '<span class="badge bg-success">Success</span>'
+                if imagen_detail["info_status"] != "ok":
+                    msg_imagen_detail = '<span class="badge bg-danger">' + imagen_detail["info_msg"] + '</span>'
 
                 min_template = """
                    <div class="col-md-3">
@@ -262,7 +278,7 @@ def generarIndexDirs(path, platilla_html):
                 """.format(url_imagen=url_imagen,
                            name_imagen=img_name,
                            peso=peso_archivo,
-                           dimensiones="ancho:"+imagen_detail['width']+"px - "+"alto:"+imagen_detail['height']+"px  "+ msg_img_detail,
+                           dimensiones="ancho:"+imagen_detail['width']+"px - "+"alto:"+imagen_detail['height']+"px "+ msg_imagen_detail,
                            ancho_imagen=imagen_detail['width']+"px",
                            alto_imagen=imagen_detail['height']+"px",
                            )
@@ -311,18 +327,27 @@ def generarIndexDirs(path, platilla_html):
 # path = r"D:\repos\cdn_webs"
 # quality of produced .webp images [0-100]
 
-
+print("")
 print("-------------------------------------------------------------------------")
-print("--- Generamos  el  index que  recorre  todas los  subdirectorios---------------------")
+print("-------------- 1. Generamos el index.html principal ---------------------")
+print("")
+print("--------- con las imagenes de todos los directorios ---------------------")
 print("-------------------------------------------------------------------------")
+print("")
+print("")
 currentDir = os.path.abspath(__file__)
 currentDir = os.path.dirname(currentDir)
 
 generarIndex(currentDir, plantilla)
 
+cls()
+print("")
 print("-------------------------------------------------------------------------")
-print("--- Recorremos las  carpetas  y generamos  su  index ---------------------")
+print("-------------- 2. Generamos el index.html por Directorio ----------------")
+print("")
+print("")
 print("-------------------------------------------------------------------------")
+time.sleep(2)
 # --------------------para setear carpeta
 
 
@@ -340,6 +365,15 @@ print("-------------------------------------------------------------------------
 
 
 for directorio in CONFIG['directorios']:
+    cls()
+    print("")
+    print("-------------------------------------------------------------------------")
+    print("-------------- Generando index.html de :"+Style.BRIGHT+Fore.GREEN +directorio+ Fore.RESET+Style.RESET_ALL +"----------------")
+    time.sleep(2)
     new_directorio = currentDir + os.sep + directorio
     os.chdir(new_directorio)
     generarIndexDirs(new_directorio, plantilla)
+
+
+time.sleep(2)
+
