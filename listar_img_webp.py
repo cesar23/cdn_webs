@@ -136,9 +136,9 @@ def generarIndex(path, platilla_html):
                 # url_imagen =CONFIG['server']+"{}".format(pathServer)
 
                 # url_imagen = "https://cesar23.github.io/{}".format(img_name)
-                msg_imagen_detail='<span class="badge text-bg-success">Success</span>'
+                msg_imagen_detail='<span class="badge bg-success">Success</span>'
                 if imagen_detail["info_status"] !="ok":
-                    msg_imagen_detail = '<span class="badge text-bg-danger">'+imagen_detail["info_msg"]+'</span>'
+                    msg_imagen_detail = '<span class="badge bg-danger">'+imagen_detail["info_msg"]+'</span>'
 
                 min_template = """
                    <div class="col-md-3">
@@ -162,7 +162,7 @@ def generarIndex(path, platilla_html):
                 """.format(url_imagen=url_imagen,
                            name_imagen=img_name,
                            peso=peso_archivo,
-                           dimensiones="ancho:"+imagen_detail['width']+"px - "+"alto:"+imagen_detail['height']+"px"+ msg_imagen_detail,
+                           dimensiones="ancho:"+imagen_detail['width']+"px - "+"alto:"+imagen_detail['height']+"px "+ msg_imagen_detail,
 
                            ancho_imagen=imagen_detail['width']+"px",
                            alto_imagen=imagen_detail['height']+"px",
