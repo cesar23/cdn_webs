@@ -15,7 +15,7 @@ from subprocess import call
 from glob import glob
 
 import os, sys
-
+import cv2
 from Config import *
 
 
@@ -42,6 +42,28 @@ def humanbytes(B):
 
 
 plantilla = CONFIG['plantillaGlobal']
+
+def get_imagen_details(path_file):
+    """Funcion que devuelve informacion de la imagen de
+
+    Parameters
+    ----------
+    path_file : str
+        parametro path de la imagen
+
+    Returns
+    -------
+    Diccionario
+        devuelve un diccionario
+    """
+    try:
+        image = cv2.imread(path_file)
+        ancho = image.shape[1]  # columnas
+        alto = image.shape[0]  # filas
+        return {"info_status":"ok","width": str(ancho), "height": str(alto)}
+    except:
+        return {"info_status":"Error no es una imagen que pueda obtener las dimensiones","width": "50", "height": "50"}
+
 
 def getCurrentNameDir():
     abspath = os.path.abspath(__file__)
@@ -80,6 +102,8 @@ def generarIndex(path, platilla_html):
                 img_list.append(file)
                 img_name = file
 
+                imagen_detail = get_imagen_details(archivo)
+
                 path_corto=archivo.replace(path,'')
                 path_corto=NameDir +path_corto
                 path_corto=path_corto.replace('\\','/').replace('//','/')
@@ -91,20 +115,32 @@ def generarIndex(path, platilla_html):
                 #url_imagen = "https://cesar23.github.io/{}".format(img_name)
 
                 min_template = """
-                <div class="col-md-3">
+              <div class="col-md-3">
                             <div class="card">
-                                <img class="card-img-bottom img-fluid"
+                                <img width="{ancho_imagen}" height="{alto_imagen}" 
+                                class="card-img-bottom img-fluid"
                                     src="https://www.solodev.com/_/images/client-loader.gif" loading="lazy" data-src="{url_imagen}"/>
                                 <div class="card-body">
                                     <h6 class="card-title">{name_imagen}</h6>
-                                    <p class="card-text">peso de archivo es:{peso}</p>
+                                    <p class="card-text">peso de archivo es: <strong>{peso}</strong><br>
+                                        link es : <a href="{url_imagen}">{url_imagen}</a>  <br>
+                                        info: {dimensiones}
+                                     </p>
+                                     <button class="btn-clip" onclick="copiarAlPortapapeles2(this)">Copiar Link Imagen</button>
                                     <a href="{url_imagen}" class="btn btn-primary">Ver</a>
                                 </div>
         
                             </div>
                         </div>
                 
-                """.format(url_imagen=url_imagen, name_imagen=img_name,peso=peso_archivo)
+                """.format(url_imagen=url_imagen,
+                           name_imagen=img_name,
+                           peso=peso_archivo,
+                           dimensiones="ancho:"+imagen_detail['width']+"px - "+"alto:"+imagen_detail['height']+"px",
+
+                           ancho_imagen=imagen_detail['width']+"px",
+                           alto_imagen=imagen_detail['height']+"px",
+                           )
 
                 #
                 # str ="https://cesar23.github.io/web_cursos_geral/2020/{}".format(img_name)
