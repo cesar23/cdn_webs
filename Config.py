@@ -69,6 +69,12 @@ CONFIG = {
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
             crossorigin="anonymous"></script>
+            <style>
+            .card-img, .card-img-bottom, .card-img-top {
+    /* width: 100%; */
+     width: auto;
+}
+            </style>
 </head>
 <body>
 
