@@ -29,6 +29,7 @@ CONFIG = {
         "carpeta -> camicv":SERVER_PATH_URL+"/camicv/index.html"+"?aletorio="+str(tiemp),
         "carpeta -> pcbyte":SERVER_PATH_URL+"/pcbyte/index.html"+"?aletorio="+str(tiemp),
         "carpeta -> webcursos":SERVER_PATH_URL+"/webcursos/index.html"+"?aletorio="+str(tiemp),
+        "carpeta -> pacificobrevetes.com":SERVER_PATH_URL+"/pacificobrevetes.com/index.html"+"?aletorio="+str(tiemp),
         "carpeta -> lissacorp":SERVER_PATH_URL+"/lissacorp/index.html"+"?aletorio="+str(tiemp),
         "carpeta -> importaciones":SERVER_PATH_URL+"/importaciones/index.html"+"?aletorio="+str(tiemp),
         "carpeta -> tareastore":SERVER_PATH_URL+"/tareastore/index.html"+"?aletorio="+str(tiemp),
