@@ -18,24 +18,34 @@ timestamp = datetime.timestamp(now)
 
 tiemp = now.strftime("%Y-%m-%d_%H-%M-%S")
 
+# directorios que seran recorridos
+search_dirs=["camicv","pcbyte","pacificobrevetes.com","webcursos","lissacorp","soluciones-tools","importaciones","tareastore","iconos_png","iconos_svg"] #IMPORTANTE AQUI
+
+# diccionario que  contiene los links para ser pintado sen html
+links_dic={"carpeta -> index":SERVER_PATH_URL+"/index.html"+"?aletorio="+str(tiemp)}
+
+# aqui llenamos el disccionario con los  directorios
+for i in search_dirs:
+    links_dic["carpeta ->{}".format(i)]=SERVER_PATH_URL+"/"+i+"/index.html"+"?aletorio="+str(tiemp)
 
 CONFIG = {
     'server': SERVER,
     'dirRoot': getCurrentNameDir(),
-    'directorios':["camicv","pcbyte","webcursos","lissacorp","soluciones-tools","importaciones","tareastore","iconos_png","iconos_svg"], #IMPORTANTE AQUI
-    'links':{
-        "carpeta -> index":SERVER_PATH_URL+"/index.html"+"?aletorio="+str(tiemp),
-        "carpeta -> soluciones-tools":SERVER_PATH_URL+"/soluciones-tools/index.html"+"?aletorio="+str(tiemp),
-        "carpeta -> camicv":SERVER_PATH_URL+"/camicv/index.html"+"?aletorio="+str(tiemp),
-        "carpeta -> pcbyte":SERVER_PATH_URL+"/pcbyte/index.html"+"?aletorio="+str(tiemp),
-        "carpeta -> webcursos":SERVER_PATH_URL+"/webcursos/index.html"+"?aletorio="+str(tiemp),
-        "carpeta -> pacificobrevetes.com":SERVER_PATH_URL+"/pacificobrevetes.com/index.html"+"?aletorio="+str(tiemp),
-        "carpeta -> lissacorp":SERVER_PATH_URL+"/lissacorp/index.html"+"?aletorio="+str(tiemp),
-        "carpeta -> importaciones":SERVER_PATH_URL+"/importaciones/index.html"+"?aletorio="+str(tiemp),
-        "carpeta -> tareastore":SERVER_PATH_URL+"/tareastore/index.html"+"?aletorio="+str(tiemp),
-        "carpeta -> iconos_png":SERVER_PATH_URL+"/iconos_png/index.html"+"?aletorio="+str(tiemp),
-        "carpeta -> iconos_svg":SERVER_PATH_URL+"/iconos_svg/index.html"+"?aletorio="+str(tiemp),
-    },
+    'directorios':search_dirs,
+    'links':links_dic,
+    # 'links':{
+    #     "carpeta -> index":SERVER_PATH_URL+"/index.html"+"?aletorio="+str(tiemp),
+    #     "carpeta -> soluciones-tools":SERVER_PATH_URL+"/soluciones-tools/index.html"+"?aletorio="+str(tiemp),
+    #     "carpeta -> camicv":SERVER_PATH_URL+"/camicv/index.html"+"?aletorio="+str(tiemp),
+    #     "carpeta -> pcbyte":SERVER_PATH_URL+"/pcbyte/index.html"+"?aletorio="+str(tiemp),
+    #     "carpeta -> webcursos":SERVER_PATH_URL+"/webcursos/index.html"+"?aletorio="+str(tiemp),
+    #     "carpeta -> pacificobrevetes.com":SERVER_PATH_URL+"/pacificobrevetes.com/index.html"+"?aletorio="+str(tiemp),
+    #     "carpeta -> lissacorp":SERVER_PATH_URL+"/lissacorp/index.html"+"?aletorio="+str(tiemp),
+    #     "carpeta -> importaciones":SERVER_PATH_URL+"/importaciones/index.html"+"?aletorio="+str(tiemp),
+    #     "carpeta -> tareastore":SERVER_PATH_URL+"/tareastore/index.html"+"?aletorio="+str(tiemp),
+    #     "carpeta -> iconos_png":SERVER_PATH_URL+"/iconos_png/index.html"+"?aletorio="+str(tiemp),
+    #     "carpeta -> iconos_svg":SERVER_PATH_URL+"/iconos_svg/index.html"+"?aletorio="+str(tiemp),
+    # },
 
     'plantillaGlobal' : """
 <!doctype html>
