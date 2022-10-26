@@ -1,4 +1,11 @@
 #!/usr/bin/env bash
+scriptPathDir=$(dirname $0)
+scriptPathFile=$(realpath $0)
+scriptPathFileName="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
+# echo "scriptPathDir: $scriptPathDir"
+# echo "scriptPathFile: $scriptPathFile"
+# echo "scriptPathFileName: $scriptPathFileName"
+
 function upgit() {
 	git pull
     git add -A
@@ -21,6 +28,7 @@ function gitup2() {
 }
 
 function compilar() {
+   cd $scriptPathDir
     python listar_img_webp.py
 }
 
