@@ -5,7 +5,7 @@ scriptPathFileName="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
 # echo "scriptPathDir: $scriptPathDir"
 # echo "scriptPathFile: $scriptPathFile"
 # echo "scriptPathFileName: $scriptPathFileName"
-
+# -------------- version 01
 function upgit() {
 	git pull
     git add -A
