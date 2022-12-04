@@ -126,7 +126,7 @@ def generarIndex(path, platilla_html):
             print('path_archivo :', archivo)
             # se pueden utilizar más tipos de imágenes (bmp, tiff, gif)
             # if file.endswith(".jpg") or file.endswith(".png") or file.endswith(".jpeg"):
-            if file.endswith(".webp") or file.endswith(".jpg") or file.endswith(".png") or file.endswith(".svg"):
+            if file.endswith(".webp") or file.endswith(".jpg") or file.endswith(".png") or file.endswith(".svg") or file.endswith(".gif"):
                 img_list.append(file)
                 img_name = file
                 # dimension_imagen = getDimensionImagen(archivo)
