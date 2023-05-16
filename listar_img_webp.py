@@ -15,7 +15,7 @@ import sys, os, re
 import time
 from subprocess import call
 from glob import glob
-import cv2
+import cv2 # pip install opencv-python
 from Config import *
 from colorama import Style,Back,Fore, init
 init()
