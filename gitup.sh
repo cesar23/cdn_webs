@@ -35,6 +35,11 @@ function compilar() {
 
 clear
 
+echo "###############################################"
+echo "############# Compilar Imagenes ###############"
+echo "###############################################"
+echo ""
+sleep 2
 compilar
 gitup
 

@@ -19,7 +19,7 @@ timestamp = datetime.timestamp(now)
 tiemp = now.strftime("%Y-%m-%d_%H-%M-%S")
 
 # directorios que seran recorridos
-search_dirs=["camicv","pcbyte","pacificobrevetes.com","webcursos","lissacorp","soluciones-tools","importaciones","tareastore","iconos_png","iconos_svg","iconos_gif"] #IMPORTANTE AQUI
+search_dirs=["pcbyte","pacificobrevetes.com","webcursos","soluciones-tools""tareastore","iconos_png","iconos_svg","iconos_gif"] #IMPORTANTE AQUI
 
 # diccionario que  contiene los links para ser pintado sen html
 links_dic={"carpeta -> index":SERVER_PATH_URL+"/index.html"+"?aletorio="+str(tiemp)}

@@ -1,0 +1,33 @@
+
+dpython:S2208"GImport only needed names or import the module and then use its members.(æ­ƒÕþÿÿÿÿ
+dpython:S117$"MRename this parameter "B" to match the regular expression ^[_a-z][a-z0-9_]*$.(›è¨â
+Tpython:S5754M"<Specify an exception class to catch or reraise the exception(ˆÊÉ·
+ppython:S1542P"XRename function "getDimensionImagen" to match the regular expression ^[a-z_][a-z0-9_]*$.(º³šÛ
+Tpython:S5754V"<Specify an exception class to catch or reraise the exception(ˆÊÉ·
+opython:S1542Z"WRename function "getCurrentNameDir" to match the regular expression ^[a-z_][a-z0-9_]*$.(š ®Ì
+ppython:S1542`"SRename function "getCurrentDir" to match the regular expression ^[a-z_][a-z0-9_]*$.(¾ÀÃªýÿÿÿÿ
+tpython:S117n"XRename this local variable "NameDir" to match the regular expression ^[_a-z][a-z0-9_]*$.(ÊÍ¡ úÿÿÿÿ
+spython:S117j"\Rename this local variable "excludeDirs" to match the regular expression ^[_a-z][a-z0-9_]*$.(þ»¼‚
+xpython:S117Œ"[Rename this local variable "pathServer" to match the regular expression ^[_a-z][a-z0-9_]*$.(˜¢ôÏûÿÿÿÿ
+zpython:S117|"^Rename this local variable "sizeBytesfile" to match the regular expression ^[_a-z][a-z0-9_]*$.(ù¢§’ûÿÿÿÿ
+jpython:S1542f"RRename function "generarIndex" to match the regular expression ^[a-z_][a-z0-9_]*$.(˜éà™
+;python:S125v"Remove this commented out code.(ÙŽœ¶ýÿÿÿÿ
+<python:S125„"Remove this commented out code.(µºî¯ýÿÿÿÿ
+<python:S125‰"Remove this commented out code.(©Ìê²ÿÿÿÿÿ
+7python:S125"Remove this commented out code.(Ï‰íý
+6python:S125"Remove this commented out code.(äÁõ=
+7python:S125š"Remove this commented out code.(°ãÂè
+7python:S125»"Remove this commented out code.(ÆÔœ¦
+ppython:S117Ý"XRename this local variable "NameDir" to match the regular expression ^[_a-z][a-z0-9_]*$.(žÅÚ³
+tpython:S117Ù"\Rename this local variable "excludeDirs" to match the regular expression ^[_a-z][a-z0-9_]*$.(þ»¼‚
+spython:S117ú"[Rename this local variable "pathServer" to match the regular expression ^[_a-z][a-z0-9_]*$.(‰‚×
+{python:S117ë"^Rename this local variable "sizeBytesfile" to match the regular expression ^[_a-z][a-z0-9_]*$.(ù¢§’ûÿÿÿÿ
+tpython:S1542Õ"VRename function "generarIndexDirs" to match the regular expression ^[a-z_][a-z0-9_]*$.(ö‹ø×þÿÿÿÿ
+Mpython:S1481ó"4Remove the unused local variable "dimension_imagen".(ñ‰°˜
+<python:S125å"Remove this commented out code.(ÙŽœ¶ýÿÿÿÿ
+7python:S125û"Remove this commented out code.(Ï‰íý
+7python:S125þ"Remove this commented out code.(°ãÂè
+7python:S125ž"Remove this commented out code.(ÆÔœ¦
+7python:S125¸"Remove this commented out code.(ÆÔœ¦
+<python:S125Ä"Remove this commented out code.(¤ÛÅ£ýÿÿÿÿ
+7python:S125â"Remove this commented out code.(¥Œ´
